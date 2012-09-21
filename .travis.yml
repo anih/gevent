@@ -35,7 +35,7 @@ install:
  - sudo $PYTHON setup.py install
 script:
  - "echo `date`: Started testing"
- - cd greentest && $PYTHON testrunner.py test__socket_dns.py
+ - cd greentest && $PYTHON test__socket_dns.py
  - "echo `date`: Finished testing"
 notifications:
   email:
