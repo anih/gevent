@@ -3,6 +3,7 @@ cimport cares
 import sys
 from python cimport *
 from _socket import gaierror
+import time
 
 
 __all__ = ['channel']
@@ -194,6 +195,7 @@ cdef void gevent_ares_host_callback(void *arg, int status, int timeouts, hostent
     channel, callback = <tuple>arg
     Py_DECREF(<PyObjectPtr>arg)
     cdef object host_result
+    print '\n%s ares.gethostbyname result(%r, %r, %r, %r)' % (time.time(), channel, callback, status, timeouts)
     try:
         if status or not host:
             callback(result(None, gaierror(status, strerror(status))))
@@ -391,6 +393,7 @@ cdef public class channel [object PyGeventAresChannelObject, type PyGeventAresCh
         # note that for file lookups still AF_INET can be returned for AF_INET6 request
         cdef object arg = (self, callback)
         Py_INCREF(<PyObjectPtr>arg)
+        print '\n%s ares.gethostbyname(%r, %r, %r, %r)' % (time.time(), self, callback, name, family)
         cares.ares_gethostbyname(self.channel, name, family, <void*>gevent_ares_host_callback, <void*>arg)
 
     def gethostbyaddr(self, object callback, char* addr):
