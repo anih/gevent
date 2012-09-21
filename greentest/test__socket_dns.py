@@ -27,6 +27,7 @@ assert gevent_socket.gaierror is socket.gaierror
 assert gevent_socket.error is socket.error
 
 VERBOSE = sys.argv.count('-v') + 2 * sys.argv.count('-vv')
+VERBOSE = 2
 PASS = True
 LOGFILE = sys.stderr
 
