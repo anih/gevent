@@ -6,13 +6,13 @@ python:
 env:
   -
   - GEVENT_RESOLVER=ares
-  - GEVENT_FILE=thread
-  - GEVENT_BACKEND=select
-  - GEVENT_BACKEND=poll
-  - GEVENT_BACKEND=signalfd
-  - GEVENT_BACKEND=nosigmask
-  - GEVENT_RESOLVER=ares GEVENT_BACKEND=signalfd
-  - GEVENT_RESOLVER=ares GEVENT_FILE=thread
+#  - GEVENT_FILE=thread
+#  - GEVENT_BACKEND=select
+#  - GEVENT_BACKEND=poll
+#  - GEVENT_BACKEND=signalfd
+#  - GEVENT_BACKEND=nosigmask
+#  - GEVENT_RESOLVER=ares GEVENT_BACKEND=signalfd
+#  - GEVENT_RESOLVER=ares GEVENT_FILE=thread
 install:
  - deactivate
  - export VER=$TRAVIS_PYTHON_VERSION
@@ -35,7 +35,7 @@ install:
  - sudo $PYTHON setup.py install
 script:
  - "echo `date`: Started testing"
- - cd greentest && $PYTHON testrunner.py
+ - cd greentest && $PYTHON testrunner.py test__socket_dns.py
  - "echo `date`: Finished testing"
 notifications:
   email:
